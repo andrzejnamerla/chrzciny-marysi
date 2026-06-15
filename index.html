@@ -33,6 +33,72 @@ body{
     color:var(--text);
     line-height:1.8;
     font-size:1.25rem;
+    position:relative;
+    overflow-x:hidden;
+}
+
+/* 🌿 ANIMOWANE TŁO */
+.ambient-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+/* LEAVES */
+.leaf{
+    position:absolute;
+    width:40px;
+    height:40px;
+    background:rgba(122,138,116,.18);
+    border-radius:60% 40% 60% 40%;
+    animation:floatLeaf linear infinite;
+}
+
+.leaf:nth-child(1){ left:10%; animation-duration:18s; top:-10%; }
+.leaf:nth-child(2){ left:25%; animation-duration:22s; top:-20%; }
+.leaf:nth-child(3){ left:50%; animation-duration:26s; top:-30%; }
+.leaf:nth-child(4){ left:70%; animation-duration:20s; top:-15%; }
+.leaf:nth-child(5){ left:85%; animation-duration:24s; top:-25%; }
+
+@keyframes floatLeaf{
+    0%{ transform:translateY(-10vh) rotate(0deg); opacity:0; }
+    10%{ opacity:0.5; }
+    100%{ transform:translateY(110vh) rotate(360deg); opacity:0; }
+}
+
+/* GOLD PARTICLES */
+.gold-dot{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:rgba(198,166,107,.6);
+    border-radius:50%;
+    box-shadow:0 0 10px rgba(198,166,107,.4);
+    animation:floatGold linear infinite;
+}
+
+.gold-dot:nth-child(6){ left:15%; animation-duration:14s; top:-10%; }
+.gold-dot:nth-child(7){ left:35%; animation-duration:18s; top:-20%; }
+.gold-dot:nth-child(8){ left:55%; animation-duration:16s; top:-30%; }
+.gold-dot:nth-child(9){ left:75%; animation-duration:20s; top:-15%; }
+.gold-dot:nth-child(10){ left:90%; animation-duration:17s; top:-25%; }
+.gold-dot:nth-child(11){ left:45%; animation-duration:19s; top:-35%; }
+
+@keyframes floatGold{
+    0%{ transform:translateY(-10vh); opacity:0; }
+    20%{ opacity:0.7; }
+    100%{ transform:translateY(110vh); opacity:0; }
+}
+
+/* LAYERS */
+.hero, .section, footer{
+    position:relative;
+    z-index:2;
 }
 
 /* HERO */
@@ -157,25 +223,6 @@ footer{
     font-size:1.15rem;
 }
 
-/* MUSIC */
-.music-control{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    z-index:999;
-}
-
-.music-control button{
-    font-family:'Playfair Display', serif;
-    background:rgba(198,166,107,.95);
-    border:none;
-    padding:12px 18px;
-    border-radius:999px;
-    color:white;
-    font-size:1rem;
-    cursor:pointer;
-}
-
 /* MOBILE */
 @media(max-width:768px){
 
@@ -205,13 +252,20 @@ h2{
 
 <body>
 
-<!-- 🎵 MUSIC -->
-<div class="music-control">
-    <button id="musicToggle">▶︎ Włącz muzykę</button>
+<!-- 🌿 BACKGROUND ANIMATION -->
+<div class="ambient-bg">
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+    <div class="leaf"></div>
 
-    <audio id="bgMusic" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2022/10/16/audio_c8b6b8f3c3.mp3?filename=soft-piano-ambient-121719.mp3" type="audio/mpeg">
-    </audio>
+    <div class="gold-dot"></div>
+    <div class="gold-dot"></div>
+    <div class="gold-dot"></div>
+    <div class="gold-dot"></div>
+    <div class="gold-dot"></div>
+    <div class="gold-dot"></div>
 </div>
 
 <!-- HERO -->
@@ -236,7 +290,6 @@ h2{
 
 <section class="section">
 
-    <!-- KOŚCIÓŁ -->
     <div class="card">
         <h2>⛪ Kościół</h2>
 
@@ -261,7 +314,6 @@ h2{
 
     <div class="divider">❦</div>
 
-    <!-- OBIAD -->
     <div class="card">
         <h2>🍽️ Obiad</h2>
 
@@ -286,7 +338,6 @@ h2{
 
     <div class="divider">❦</div>
 
-    <!-- TRASA -->
     <div class="card">
         <h2>🚗 Trasa</h2>
 
@@ -304,7 +355,6 @@ h2{
 
     <div class="divider">❦</div>
 
-    <!-- CYTAT -->
     <div class="card">
         <div class="quote">
             „Dziecko jest miłością, która stała się widzialna.”
@@ -319,28 +369,6 @@ h2{
     Z miłością ❤️<br>
     Marysi wraz z Rodzicami
 </footer>
-
-<!-- 🎵 MUSIC SCRIPT -->
-<script>
-const music = document.getElementById("bgMusic");
-const btn = document.getElementById("musicToggle");
-
-let playing = false;
-
-btn.addEventListener("click", async () => {
-    if (!playing) {
-        try {
-            await music.play();
-            playing = true;
-            btn.innerHTML = "🔊 Wyłącz muzykę";
-        } catch (e) {}
-    } else {
-        music.pause();
-        playing = false;
-        btn.innerHTML = "▶︎ Włącz muzykę";
-    }
-});
-</script>
 
 </body>
 </html>
