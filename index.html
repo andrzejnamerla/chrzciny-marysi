@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- Playfair Display -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -28,17 +27,12 @@
     box-sizing:border-box;
 }
 
-/* 🔥 GLOBAL FONT (WSZYSTKO) */
 body{
     font-family:'Playfair Display', serif;
     background:var(--bg);
     color:var(--text);
     line-height:1.8;
     font-size:1.25rem;
-}
-
-h1, h2, h3, p, a, span, div, button{
-    font-family:'Playfair Display', serif !important;
 }
 
 /* HERO */
@@ -211,11 +205,11 @@ h2{
 
 <body>
 
-<!-- MUSIC -->
+<!-- 🎵 MUSIC -->
 <div class="music-control">
-    <button id="musicToggle">🔊 Muzyka</button>
+    <button id="musicToggle">▶︎ Włącz muzykę</button>
 
-    <audio id="bgMusic" loop autoplay>
+    <audio id="bgMusic" loop>
         <source src="https://cdn.pixabay.com/download/audio/2022/10/16/audio_c8b6b8f3c3.mp3?filename=soft-piano-ambient-121719.mp3" type="audio/mpeg">
     </audio>
 </div>
@@ -228,7 +222,7 @@ h2{
             Zaproszenie na Chrzciny
         </div>
 
-        <h1>Marysia</h1>
+        <h1>Marysi</h1>
 
         <p>
             Z ogromną radością zapraszamy Was na uroczystość Chrztu Świętego
@@ -323,46 +317,27 @@ h2{
 
 <footer>
     Z miłością ❤️<br>
-    Marysia wraz z Rodzicami
+    Marysi wraz z Rodzicami
 </footer>
 
-<!-- MUSIC SCRIPT -->
+<!-- 🎵 MUSIC SCRIPT -->
 <script>
 const music = document.getElementById("bgMusic");
 const btn = document.getElementById("musicToggle");
 
-let playing = true;
+let playing = false;
 
-window.addEventListener("load", async () => {
-    try {
-        await music.play();
-        playing = true;
-        btn.innerHTML = "🔊 Wyłącz muzykę";
-    } catch (e) {
-        playing = false;
-        btn.innerHTML = "▶︎ Włącz muzykę";
-    }
-});
-
-document.body.addEventListener("click", async () => {
+btn.addEventListener("click", async () => {
     if (!playing) {
         try {
             await music.play();
             playing = true;
             btn.innerHTML = "🔊 Wyłącz muzykę";
-        } catch(e) {}
-    }
-}, { once:true });
-
-btn.addEventListener("click", () => {
-    if (playing) {
-        music.pause();
-        btn.innerHTML = "▶︎ Włącz muzykę";
-        playing = false;
+        } catch (e) {}
     } else {
-        music.play();
-        btn.innerHTML = "🔊 Wyłącz muzykę";
-        playing = true;
+        music.pause();
+        playing = false;
+        btn.innerHTML = "▶︎ Włącz muzykę";
     }
 });
 </script>
